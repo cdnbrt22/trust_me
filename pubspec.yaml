@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_auth: ^1.1.0
   firebase_core: ^1.0.3
+  flutter_svg: ^0.19.1
 
 dev_dependencies:
   flutter_test:
@@ -45,7 +46,19 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/fonts/
 
+  fonts:
+    - family: font1
+      fonts:
+        - asset: assets/fonts/NoVirus.ttf
+    # - family: Roboto1
+    #   fonts:
+    #     - asset: assets/font/Roboto-Regular.ttf
+    # - family: Roboto2
+    #   fonts:
+    #     - asset: assets/font/RobotoMono-Regular.ttf
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -76,10 +89,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-fonts:
-    - family: Font1
-      fonts:
-        - asset: assets/fonts/Pacifico-Regular.ttf
-    - family: Font2
-      fonts:
-        - asset: assets/font/font2.ttf

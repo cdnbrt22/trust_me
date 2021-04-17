@@ -8,8 +8,8 @@ class App extends StatelessWidget {
       title: 'Sign in',
       theme: ThemeData(
         brightness: Brightness.light,
-        primaryColor: Colors.brown[500],
-        accentColor: Colors.blue[200],
+        primaryColor: Colors.white,
+        // accentColor: Colors.blue[200],
         fontFamily: 'Font1',
       ),
       home: LoginScreen(),
