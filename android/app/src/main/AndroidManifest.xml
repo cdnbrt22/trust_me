@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.trustme">
+    package="com.cactus.trustme">
    <application
         android:label="trustme"
         android:icon="@mipmap/ic_launcher">
