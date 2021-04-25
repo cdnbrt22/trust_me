@@ -27,11 +27,18 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  # cupertino_icons: ^1.0.2
   firebase_auth: ^1.1.0
   firebase_core: ^1.0.3
-  flutter_svg: ^0.19.1
-
+  flutter_svg: ^0.21.0+1
+  http: ^0.13.0
+  # charts_flutter: ^0.10.0
+  cloud_firestore: ^1.0.6
+  provider: ^5.0.0
+  flutter_slidable: ^0.6.0
+  # http: ^0.12.0+1
+  # http: ^0.12.2
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -48,11 +55,16 @@ flutter:
   uses-material-design: true
   assets:
     - assets/fonts/
+    - assets/icons/
+    # - assets/icon/
+    - assets/
 
   fonts:
     - family: font1
       fonts:
         - asset: assets/fonts/NoVirus.ttf
+
+  
     # - family: Roboto1
     #   fonts:
     #     - asset: assets/font/Roboto-Regular.ttf

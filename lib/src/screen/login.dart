@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trustme/src/screen/home.dart';
+//import 'package:trustme/src/screen/assets/screens/menu_dashboard.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
+import 'package:trustme/src/screen/menu_dashboard.dart';
+import 'package:trustme/src/screen/signup.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -12,11 +15,18 @@ class _LoginScreenState extends State<LoginScreen> {
   String _email;
   String _password;
   final _auth = FirebaseAuth.instance;
+  final formkey = GlobalKey<FormState>();
 
   Widget _BuildLogo() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+        SvgPicture.asset(
+          'assets/icons/virus.svg',
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height / 8,
+        ),
+        SizedBox(height: 10),
         Text(
           'Trust Me',
           style: TextStyle(
@@ -48,24 +58,13 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Login',
-                      style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.height / 55,
-                          fontFamily: 'Roboto2'),
-                    )
-                  ],
-                ),
                 _buildEmailRow(),
                 _buildPasswordRow(),
                 _button(),
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -159,102 +158,68 @@ class _LoginScreenState extends State<LoginScreen> {
             onPressed: () {
               _auth.signInWithEmailAndPassword(
                   email: _email, password: _password);
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => HomeScreen()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => MenuDashboardsAndHome()));
             },
           ),
         ),
-        new FlatButton(
-            onPressed: () {
-              _auth.createUserWithEmailAndPassword(
-                  email: _email, password: _password);
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => HomeScreen()));
-            },
-            child: Text('Create my account'))
       ],
     ));
+  }
+
+  Widget _signupButton() {
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Padding(
+          padding: const EdgeInsets.only(top: 40),
+          child: Container(
+              child: Row(children: [
+            Text('Don\'t hava a account ?'),
+            FlatButton(
+                child: Text('Sign up',
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: MediaQuery.of(context).size.height / 50,
+                        fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  // _auth.createUserWithEmailAndPassword(
+                  //     email: _email, password: _password);
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => SignUp()));
+                }),
+          ])))
+    ]);
+  }
+
+  checkFields() {
+    final form = formkey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            // appBar: AppBar(
-            //   title: Text('Login'),
-            // ),
-
+            backgroundColor: Color(0xFF186E77),
+            resizeToAvoidBottomInset: true,
             body: Stack(
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.height / 1.25,
-          width: MediaQuery.of(context).size.width,
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.red[800],
-                borderRadius: BorderRadius.only(
-                    bottomLeft: const Radius.circular(100),
-                    bottomRight: const Radius.circular(100))),
-          ),
-        ),
-        Container(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            // child: Form(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                _BuildLogo(),
-                _BuildContainer(),
-                /*Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                          labelText: 'Email', hintText: 'none@none.com'),
-                      onChanged: (value) {
-                        setState(() {
-                          _email = value.trim();
-                        });
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: TextFormField(
-                      decoration: InputDecoration(labelText: 'Password'),
-                      obscureText: true,
-                      onChanged: (value) {
-                        setState(() {
-                          _password = value.trim();
-                        });
-                      },
-                    ),
-                  ),
-                  new RaisedButton(
-                    child: new Text('Sign in'),
-                    onPressed: () {
-                      _auth.signInWithEmailAndPassword(
-                          email: _email, password: _password);
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeScreen()));
-                    },
-                  ),
-                  new FlatButton(
-                      onPressed: () {
-                        _auth.createUserWithEmailAndPassword(
-                            email: _email, password: _password);
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => HomeScreen()));
-                      },
-                      child: Text('Create my account'))*/
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  // crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    _BuildLogo(),
+                    _BuildContainer(),
+                    _signupButton(),
+                  ],
+                ),
+
+                //),
               ],
-            ),
-          ),
-        ),
-        //),
-      ],
-    )));
+            )));
   }
 }
